@@ -1,0 +1,52 @@
+.about {
+    padding: 4rem 0;
+    text-align: center;
+    background-color: white;
+}
+
+.about h2 {
+    color: var(--secondary-color);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .profile-container {
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: 4px solid var(--light-bg);
+}
+
+.profile-summary {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+}
+
+.cv-link {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.cv-link:hover {
+    color: var(--secondary-color);
+}

@@ -1,0 +1,54 @@
+.contact {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.contact h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.contact .intro {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+}
+
+.contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.contact-info, .social-links {
+    text-align: left;
+}
+
+.contact-info h3, .social-links h3 {
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.contact a {
+    color: white;
+    text-decoration: underline;
+}
+
+.contact a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.social-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.social-links li {
+    margin-bottom: 0.5rem;
+}
