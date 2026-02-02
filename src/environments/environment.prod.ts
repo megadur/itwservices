@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://htprzu7ksm5kqmcj.myfritz.net:5030',
-  validationBaseUrl: 'https://htprzu7ksm5kqmcj.myfritz.net:5031',
+  apiBaseUrl: 'https://htprzu7ksm5kqmcj.myfritz.net:5040',
+  validationBaseUrl: 'https://htprzu7ksm5kqmcj.myfritz.net:5041',
 };
