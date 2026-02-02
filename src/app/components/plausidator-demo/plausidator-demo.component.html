@@ -1,0 +1,157 @@
+<section class="clean-block clean-form dark">
+  <div class="container">
+    <div class="block-heading">
+      <h2 class="text-info">Plausidator Demo</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <p class="lead text-muted mb-4 text-start">
+          Validate your e-prescriptions (E-Rezept) against TA1 rules using our comprehensive
+          validation engine.
+        </p>
+        <div class="text-center mb-4">
+            <a routerLink="/plausidator/status" class="btn btn-outline-info btn-sm">
+                <i class="fa fa-list-alt me-1"></i> View Validation Rules Status
+            </a>
+        </div>
+        <div class="features mb-4">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>
+            <span>Full TA1 Rule Verification</span>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>
+            <span>Support for JSON and XML FHIR Bundles</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>
+            <span>Detailed Error Reporting</span>
+          </div>
+        </div>
+        <div class="card shadow-lg border-0 rounded-lg">
+          <div class="card-body p-5">
+            <div class="mb-3">
+              <label class="form-label" for="customFile">Upload FHIR Bundle (JSON or XML)</label>
+              <input
+                type="file"
+                class="form-control"
+                id="customFile"
+                accept=".xml,.json"
+                (change)="onFileSelected($event)"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Or Paste Content</label>
+              <textarea
+                class="form-control font-monospace"
+                rows="10"
+                [(ngModel)]="fhirContent"
+                placeholder="Paste FHIR Bundle content here..."
+              ></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button
+                class="btn btn-primary"
+                type="button"
+                [disabled]="!fhirContent || isLoading"
+                (click)="validate()"
+              >
+                <span
+                  *ngIf="isLoading"
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Validate
+              </button>
+            </div>
+
+            <div *ngIf="error" class="alert alert-danger mt-3">
+              {{ error }}
+            </div>
+            <div
+              *ngIf="requestStatus && !error"
+              class="alert mt-3"
+              [ngClass]="{
+                'alert-success': requestStatus === 'Validation Successful',
+                'alert-warning': requestStatus !== 'Validation Successful',
+              }"
+            >
+              {{ requestStatus }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-5" *ngIf="validationResult">
+      <div class="col-md-12">
+        <div class="card shadow-sm">
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+            [ngClass]="
+              validationResult.status === 'PASS' ? 'bg-success text-white' : 'bg-danger text-white'
+            "
+          >
+            <span
+              >Validation Result: <strong>{{ validationResult.status }}</strong></span
+            >
+            <small>{{ validationResult.timestamp | date: 'medium' }}</small>
+          </div>
+          <div class="card-body">
+            <!-- Summary Stats -->
+            <div class="row mb-3 text-center">
+              <div class="col">
+                <h3 class="text-danger">{{ validationResult.summary?.errors || 0 }}</h3>
+                <span class="text-muted">Errors</span>
+              </div>
+              <div class="col">
+                <h3 class="text-warning">{{ validationResult.summary?.warnings || 0 }}</h3>
+                <span class="text-muted">Warnings</span>
+              </div>
+              <div class="col">
+                <h3 class="text-info">{{ validationResult.summary?.infos || 0 }}</h3>
+                <span class="text-muted">Infos</span>
+              </div>
+            </div>
+
+            <!-- Detailed Issues -->
+            <div *ngIf="validationResult.errors?.length > 0">
+              <h5 class="text-danger mt-3">Errors</h5>
+              <ul class="list-group mb-3">
+                <li
+                  *ngFor="let err of validationResult.errors"
+                  class="list-group-item list-group-item-danger"
+                >
+                  <strong>{{ err.code }}</strong
+                  >: {{ err.message }} <span *ngIf="err.pzn">(PZN: {{ err.pzn }})</span>
+                </li>
+              </ul>
+            </div>
+
+            <div *ngIf="validationResult.warnings?.length > 0">
+              <h5 class="text-warning mt-3">Warnings</h5>
+              <ul class="list-group mb-3">
+                <li
+                  *ngFor="let warn of validationResult.warnings"
+                  class="list-group-item list-group-item-warning"
+                >
+                  <strong>{{ warn.code }}</strong
+                  >: {{ warn.message }} <span *ngIf="warn.pzn">(PZN: {{ warn.pzn }})</span>
+                </li>
+              </ul>
+            </div>
+
+            <h5 class="mt-4">Full Response</h5>
+            <pre
+              class="bg-light p-3 border rounded"
+              style="max-height: 400px; overflow: auto"
+            ><code>{{ validationResult | json }}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,4 @@
+/* Component specific styles */
+textarea.form-control {
+  font-size: 0.85rem;
+}

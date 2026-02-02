@@ -1,0 +1,279 @@
+<section class="clean-block clean-form dark">
+  <div class="container">
+      <div class="block-heading">
+          <h2 class="text-info">Status der Validierungsregeln</h2>
+          <p class="lead text-muted mb-4">
+              Übersicht über den Implementierungsstatus der TA1-Validierungsregeln.
+          </p>
+          <div class="text-start mb-4">
+              <a routerLink="/plausidator" class="btn btn-outline-primary">
+                  <i class="fa fa-arrow-left me-2"></i>Zurück zum Validator
+              </a>
+          </div>
+      </div>
+
+      <!-- Zusammenfassung -->
+      <div class="card shadow-sm mb-5">
+          <div class="card-header bg-light">
+              <h5 class="mb-0">Zusammenfassung</h5>
+          </div>
+          <div class="card-body">
+              <div class="row text-center">
+                  <div class="col-md-4">
+                      <h3 class="text-success">40%</h3>
+                      <span class="text-muted">Implementiert (27/67)</span>
+                  </div>
+                  <div class="col-md-4">
+                      <h3 class="text-danger">60%</h3>
+                      <span class="text-muted">Ausstehend (40/67)</span>
+                  </div>
+                  <div class="col-md-4">
+                      <h3>01.02.2026</h3>
+                      <span class="text-muted">Letzte Aktualisierung</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Formatvalidierung -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-success text-white">
+              <h5 class="mb-0">✅ Formatvalidierung (FMT) - 10/10 Vollständig</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Implementierung</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>FMT-001</td><td>PZN-Formatvalidierung (8 Ziffern)</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>PznFormatValidator</code></td></tr>
+                      <tr><td>FMT-002</td><td>PZN-Prüfziffernvalidierung (Modulo 11)</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>PznFormatValidator</code></td></tr>
+                      <tr><td>FMT-003</td><td>ISO 8601 DateTime-Format</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-004</td><td>Herstellerkennzeichenformat</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-005</td><td>Zählerfeld-Formate</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-006</td><td>Chargenbezeichnungsformat</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-007</td><td>Faktorkennzeichenformat</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-008</td><td>Faktorwertformat</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-009</td><td>Preiskennzeichenformat</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                      <tr><td>FMT-010</td><td>Preiswertformat</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirFormatValidator</code></td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Allgemeine Regeln -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-success text-white">
+              <h5 class="mb-0">✅ Allgemeine Regeln (GEN) - 8/8 Vollständig</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Implementierung</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>GEN-001</td><td>Deutsche Zeitzone (MEZ/MESZ)</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-002</td><td>Gültigkeitsdatum für Feldänderungen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-003</td><td>Bruttopreis-Zusammensetzung</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-004</td><td>MwSt-Berechnung für gesetzliche Gebühren</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-005</td><td>Sonderkennzeichen-Übermittlung</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-006</td><td>SOK-Gültigkeitszeitraum-Prüfung</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-007</td><td>E-Rezept SOK-Kompatibilität</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                      <tr><td>GEN-008</td><td>MwSt-Satz-Konsistenz</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>FhirAbgabedatenValidator</code></td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Berechnungsregeln -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-success text-white">
+              <h5 class="mb-0">✅ Berechnungsregeln (CALC) - 7/7 Vollständig</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Implementierung</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>CALC-001</td><td>Standard-Promilleanteil-Formel</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CalculationValidator</code></td></tr>
+                      <tr><td>CALC-002</td><td>Sonderkennzeichen-Faktor-Ausnahme</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CalculationValidator</code></td></tr>
+                      <tr><td>CALC-003</td><td>Künstliche Befruchtung Sonderkennzeichen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CalculationValidator</code></td></tr>
+                      <tr><td>CALC-004</td><td>Grundlegende Preisberechnung</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CalculationValidator</code></td></tr>
+                      <tr><td>CALC-005</td><td>MwSt-Ausschluss im Preisfeld</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CalculationValidator</code></td></tr>
+                      <tr><td>CALC-006</td><td>Preiskennzeichen-Nachschlagen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>PriceIdentifier</code></td></tr>
+                      <tr><td>CALC-007</td><td>Flexible nachgestellte Nullen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>PromilleFactor</code></td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- BTM -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-success text-white">
+              <h5 class="mb-0">✅ BTM-Validierung - 4/4 Vollständig</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Implementierung</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>BTM-001</td><td>E-BTM Gebühren-Sonderkennzeichen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>BtmDetectionValidator</code></td></tr>
+                      <tr><td>BTM-002</td><td>Alle Arzneimittel müssen aufgeführt sein</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>BtmDetectionValidator</code></td></tr>
+                      <tr><td>BTM-003</td><td>BTM Sieben-Tage-Gültigkeitsregel</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>BtmDetectionValidator</code></td></tr>
+                      <tr><td>BTM-004</td><td>BTM Diagnose-Anforderung</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>BtmDetectionValidator</code></td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Cannabis -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-success text-white">
+              <h5 class="mb-0">✅ Cannabis-Validierung (CAN) - 5/5 Vollständig</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Implementierung</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>CAN-001</td><td>Cannabis-Sonderkennzeichen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CannabisValidator</code></td></tr>
+                      <tr><td>CAN-002</td><td>Keine BTM/T-Rezept-Substanzen</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CannabisValidator</code></td></tr>
+                      <tr><td>CAN-003</td><td>Faktorfeld-Wert</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CannabisValidator</code></td></tr>
+                      <tr><td>CAN-004</td><td>Bruttopreis-Berechnung</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CannabisValidator</code></td></tr>
+                      <tr><td>CAN-005</td><td>Herstellungsdaten erforderlich</td><td><span class="status-pass">✅ Vollständig</span></td><td><code>CannabisValidator</code></td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Rezeptur -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-danger text-white">
+              <h5 class="mb-0">⭕ Rezeptur (REZ) - 0/21 (0%)</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Priorität</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>REZ-001</td><td>Identifizierung von Rezepturarzneimitteln</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Hoch</td></tr>
+                      <tr><td>REZ-002</td><td>Parenteral - Herstellerkennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-003</td><td>Parenteral - Zeitstempel-Validierung</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-004</td><td>Parenteral - Zählersequenz</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-005</td><td>Parenteral - Faktor als Promilleanteil</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-006</td><td>Parenteral - Wochenvorrat-Limit</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-007</td><td>ESQ - Herstellerkennzeichen-Typ</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-008</td><td>ESQ - Zeitstempel-Validierung</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-009</td><td>ESQ - Zähler für 02567053</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-010</td><td>ESQ - Zähler für 02566993</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-011</td><td>ESQ - Faktorkennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-012</td><td>ESQ - Teilmengen-Faktor</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-013</td><td>Cannabis/Rezeptur - Sonderkennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Hoch</td></tr>
+                      <tr><td>REZ-014</td><td>Cannabis/Rezeptur - Herstellerkennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-015</td><td>Cannabis/Rezeptur - Herstellungszeitstempel</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-016</td><td>Cannabis/Rezeptur - Zählerwerte</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>REZ-017</td><td>Cannabis/Rezeptur - Faktorkennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-018</td><td>Cannabis/Rezeptur - Faktor als Promilleanteil</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Hoch</td></tr>
+                      <tr><td>REZ-019</td><td>Cannabis/Rezeptur - Preiskennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Hoch</td></tr>
+                      <tr><td>REZ-020</td><td>Cannabis/Rezeptur - Preisanpassung große Mengen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>REZ-021</td><td>Validierung zusätzlicher Datenanforderungen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Hoch</td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Gebühren -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-danger text-white">
+              <h5 class="mb-0">⭕ Gebührenvalidierung (FEE) - 0/3 (0%)</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Priorität</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>FEE-001</td><td>Botendienstgebühr-Validierung</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>FEE-002</td><td>Noctu (Nachtdienstgebühr)</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>FEE-003</td><td>Wiederbeschaffungsgebühr</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Sonderfälle -->
+      <div class="card shadow-sm mb-4">
+          <div class="card-header bg-danger text-white">
+              <h5 class="mb-0">⭕ Sonderfälle (SPC) - 0/8 (0%)</h5>
+          </div>
+          <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                  <thead>
+                      <tr>
+                          <th>Regel</th>
+                          <th>Beschreibung</th>
+                          <th>Status</th>
+                          <th>Priorität</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr><td>SPC-001</td><td>Behandlung von Niedrigpreis-Arzneimitteln</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>SPC-002</td><td>Mehrkosten für § 3 Abs. 4</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>SPC-003</td><td>Künstliche Befruchtung Kennzeichen</td><td><span class="status-partial">✅ Teilweise</span></td><td>Hoch</td></tr>
+                      <tr><td>SPC-004</td><td>50% Patientenbeteiligung</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>SPC-005</td><td>Künstliche Befruchtung - Rezeptur</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Hoch</td></tr>
+                      <tr><td>SPC-006</td><td>Abweichungs-Sonderkennzeichen</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                      <tr><td>SPC-007</td><td>IK-Format für E-Rezept</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Mittel</td></tr>
+                      <tr><td>SPC-008</td><td>Vertragsabhängige SOK-Autorisierung</td><td><span class="status-fail">⭕ Ausstehend</span></td><td>Niedrig</td></tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <div class="text-center mt-5 mb-5">
+        <a routerLink="/plausidator" class="btn btn-primary btn-lg">
+            <i class="fa fa-stethoscope me-2"></i>Jetzt Validieren
+        </a>
+    </div>
+
+  </div>
+</section>
