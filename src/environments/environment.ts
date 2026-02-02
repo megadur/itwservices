@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:5030',
-  validationBaseUrl: 'http://localhost:5031',
+  apiBaseUrl: 'https://werktopf:5430',
+  validationBaseUrl: 'https://werktopf:5431',
 };

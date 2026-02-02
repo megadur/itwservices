@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -19,7 +19,10 @@ export class PlausidatorDemoComponent {
   error: string | null = null;
   requestStatus: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -29,6 +32,7 @@ export class PlausidatorDemoComponent {
         this.fhirContent = e.target?.result as string;
         this.validationResult = null;
         this.error = null;
+        this.cdr.detectChanges();
       };
       reader.readAsText(file);
     }
@@ -55,21 +59,25 @@ export class PlausidatorDemoComponent {
     const baseUrl = environment.validationBaseUrl?.replace(/\/$/, '') ?? '';
     const url = `${baseUrl}/api/validation/e-rezept`;
 
+    console.log('Sending request to:', url);
     this.http.post(url, this.fhirContent, { headers }).subscribe({
       next: (res: any) => {
+        console.log('Response received:', res);
         this.validationResult = res;
         this.isLoading = false;
         this.requestStatus =
           res.status === 'PASS' ? 'Validation Successful' : 'Validation Completed with Errors';
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error in subscription:', err);
         this.error = `Validation failed: ${err.message || err.statusText}`;
         if (err.error) {
           this.validationResult = err.error;
         }
         this.isLoading = false;
         this.requestStatus = 'Validation Failed';
+        this.cdr.detectChanges();
       },
     });
   }
