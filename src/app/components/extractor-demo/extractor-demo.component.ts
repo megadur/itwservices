@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-extractor-demo',
@@ -32,7 +33,10 @@ export class ExtractorDemoComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post('/api/extract', formData).subscribe({
+    const baseUrl = environment.apiBaseUrl?.replace(/\/$/, '') ?? '';
+    const url = `${baseUrl}/api/extract`;
+
+    this.http.post(url, formData).subscribe({
       next: (res) => {
         this.extractionResult = res;
         this.isLoading = false;
