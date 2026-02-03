@@ -2,12 +2,13 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-extractor-demo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './extractor-demo.component.html',
   styleUrl: './extractor-demo.component.css',
 })
@@ -16,6 +17,7 @@ export class ExtractorDemoComponent {
   fileContent: string = '';
   extractionResult: any = null;
   isLoading = false;
+  isReadingFile = false;
   error: string | null = null;
   // Trigger rebuild to ensure FormsModule is picked up
 
@@ -28,11 +30,22 @@ export class ExtractorDemoComponent {
     const file = event.target.files[0];
     if (file) {
       this.selectedFile = file;
+      this.isReadingFile = true;
+      this.cdr.detectChanges();
       const reader = new FileReader();
       reader.onload = (e) => {
         this.fileContent = e.target?.result as string;
         this.extractionResult = null;
         this.error = null;
+      };
+      reader.onerror = () => {
+        this.error = 'Datei konnte nicht gelesen werden.';
+      };
+      reader.onabort = () => {
+        this.error = 'Datei-Lesevorgang abgebrochen.';
+      };
+      reader.onloadend = () => {
+        this.isReadingFile = false;
         this.cdr.detectChanges();
       };
       reader.readAsText(file);

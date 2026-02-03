@@ -1,0 +1,216 @@
+<section class="clean-block clean-form dark">
+  <div class="container">
+    <div class="block-heading">
+      <h2 class="text-info">ArzSw.FHIR.Extractor – README</h2>
+      <p class="lead text-muted mb-4">
+        Eine .NET Standard 2.0 Bibliothek zum Extrahieren deutscher eRezept-Daten aus FHIR-XML-Dateien.
+      </p>
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-outline-secondary" routerLink="/extractor">Zurück zum Demo</a>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            <h3 class="h4">Funktionen</h3>
+            <ul>
+              <li><strong>Plattformübergreifend</strong>: Funktioniert mit .NET Framework 4.6.1+ und .NET Core 2.0+</li>
+              <li><strong>Standardkonform</strong>: Entspricht den deutschen KBV/ABDA FHIR-Spezifikationen</li>
+              <li><strong>Typsicher</strong>: Stark typisierte Modellklassen für alle eRezept-Daten</li>
+              <li><strong>JSON-Unterstützung</strong>: Integrierte JSON-Serialisierung für komplexe verschachtelte
+                Objekte</li>
+              <li><strong>Umfassend</strong>: Extrahiert alle Verordnungsdaten einschließlich Abrechnung, Versicherung,
+                Apotheke und Medikation</li>
+            </ul>
+
+            <h3 class="h4 mt-4">Installation</h3>
+            <h4 class="h5">NuGet-Paket (sobald veröffentlicht)</h4>
+            <pre class="bg-light p-3 border rounded" ngNonBindable><code>Install-Package ArzSw.FHIR.Extractor</code></pre>
+            <h4 class="h5 mt-3">Direkter DLL-Verweis</h4>
+            <p>Fügen Sie Ihrem Projekt einen Verweis auf <strong>ArzSw.FHIR.Extractor.dll</strong> hinzu.</p>
+
+            <h3 class="h4 mt-4">Verwendung</h3>
+            <h4 class="h5">Einfaches Beispiel</h4>
+            <pre class="bg-light p-3 border rounded" ngNonBindable>
+              <code>using ArzSw.FHIR.Extractor;
+using ArzSw.FHIR.Extractor.Models;
+
+// Extractor-Instanz erstellen
+var extractor = new ERezeptAbgabeExtractor();
+
+// Aus Datei extrahieren
+var data = extractor.ExtractFromFile("path/to/erezept.xml");
+
+// Auf extrahierte Daten zugreifen
+Console.WriteLine($"Prescription ID: &#123;data.PrescriptionId&#125;");
+Console.WriteLine($"Pharmacy: &#123;data.Pharmacy.Name&#125;");
+Console.WriteLine($"Total: &#123;data.Invoice.TotalGross&#125; &#123;data.Invoice.Currency&#125;");</code></pre>
+
+            <h4 class="h5 mt-3">Aus XML-Zeichenfolge extrahieren</h4>
+            <pre class="bg-light p-3 border rounded" ngNonBindable><code>string xmlContent = File.ReadAllText("erezept.xml");
+var data = extractor.ExtractFromXml(xmlContent);</code></pre>
+
+            <h4 class="h5 mt-3">Aus XmlDocument extrahieren</h4>
+            <pre class="bg-light p-3 border rounded" ngNonBindable><code>var xmlDoc = new XmlDocument();
+xmlDoc.Load("erezept.xml");
+var data = extractor.ExtractFromXmlDocument(xmlDoc);</code></pre>
+
+            <h3 class="h4 mt-4">Struktur der extrahierten Daten</h3>
+            <p>Die Klasse <strong>ERezeptAbgabeData</strong> enthält:</p>
+            <ul>
+              <li><strong>Apothekeninformationen</strong>: Name, IK-Nummer, Adresse</li>
+              <li><strong>Arztinformationen</strong>: LANR, Name, Qualifikationen</li>
+              <li><strong>Versicherungsinformationen</strong>: Versicherungstyp, Kostenträger-IK</li>
+              <li><strong>Medikationsabgabe</strong>: Medikationsdetails, Dosierung</li>
+              <li><strong>Rechnung</strong>: Positionen, Preise, Zuzahlungen</li>
+              <li><strong>Medikationsverordnung</strong>: Mehrere Verordnungen, BVG-Kennzeichnung</li>
+            </ul>
+
+            <h4 class="h5 mt-3">Beispielhafter Datenzugriff</h4>
+            <pre class="bg-light p-3 border rounded" ngNonBindable><code>
+              var data = extractor.ExtractFromFile("prescription.xml");
+
+// Apotheke
+Console.WriteLine($"Pharmacy: &#123;data.Pharmacy.Name&#125;");
+Console.WriteLine($"IK: &#123;data.Pharmacy.IK_Number&#125;");
+Console.WriteLine($"Address: &#123;data.Pharmacy.Address.FormattedAddress&#125;");
+
+// Rechnung
+foreach (var item in data.Invoice.LineItems)
+&#123;
+    Console.WriteLine($"PZN: &#123;item.PZN&#125;, Amount: &#123;item.Amount&#125;");
+&#125;
+
+// Versicherung
+Console.WriteLine($"Insurance: &#123;data.Coverage.PayorName&#125;");
+Console.WriteLine($"Payor IK: &#123;data.Coverage.PayorIK&#125;");
+
+// Arzt
+Console.WriteLine($"Doctor: &#123;data.Practitioner.Name.FullName&#125;");
+Console.WriteLine($"LANR: &#123;data.Practitioner.LANR&#125;");</code></pre>
+
+            <h3 class="h4 mt-4">Kompatibilität</h3>
+            <h4 class="h5">Unterstützte Plattformen</h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Plattform</th>
+                    <th scope="col">Version</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>.NET Framework</td>
+                    <td>4.6.1 oder höher</td>
+                  </tr>
+                  <tr>
+                    <td>.NET Core</td>
+                    <td>2.0 oder höher</td>
+                  </tr>
+                  <tr>
+                    <td>.NET</td>
+                    <td>5.0 oder höher</td>
+                  </tr>
+                  <tr>
+                    <td>Mono</td>
+                    <td>5.4 oder höher</td>
+                  </tr>
+                  <tr>
+                    <td>Xamarin.iOS</td>
+                    <td>10.14 oder höher</td>
+                  </tr>
+                  <tr>
+                    <td>Xamarin.Android</td>
+                    <td>8.0 oder höher</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 class="h5 mt-3">Abhängigkeiten</h4>
+            <ul>
+              <li><strong>Newtonsoft.Json</strong> (13.0.3) – JSON-Serialisierung</li>
+              <li><strong>System.ComponentModel.Annotations</strong> (5.0.0) – Datenannotation</li>
+            </ul>
+
+            <h3 class="h4 mt-4">FHIR-Spezifikationen</h3>
+            <ul>
+              <li><strong>KBV eRezept Abgabedaten</strong> (Medication Dispense)</li>
+              <li><strong>KBV eRezept Verordnung</strong> (Medication Request)</li>
+              <li><strong>DAV PKV Abgabedaten</strong> (Invoice)</li>
+              <li><strong>GKV-Erweiterungen</strong> (Coverage, DMP)</li>
+            </ul>
+
+            <h3 class="h4 mt-4">Modellklassen</h3>
+            <p>Alle Modellklassen befinden sich im Namespace <strong>ArzSw.FHIR.Extractor.Models</strong>:</p>
+            <ul>
+              <li>ERezeptAbgabeData – Hauptcontainer</li>
+              <li>InvoiceInfo – Rechnung mit Positionen</li>
+              <li>LineItemInfo – Einzelne Verordnungspositionen</li>
+              <li>PharmacyInfo – Apothekenorganisation</li>
+              <li>PractitionerInfo – Arzt/Verordner</li>
+              <li>CoverageInfo – Versicherungsschutz</li>
+              <li>MedicationDispenseInfo – Abgegebene Medikation</li>
+              <li>MedicationRequestInfo – Ursprüngliche Verordnung</li>
+              <li>Und viele mehr...</li>
+            </ul>
+
+            <h3 class="h4 mt-4">Fehlerbehandlung</h3>
+            <pre class="bg-light p-3 border rounded" ngNonBindable>
+              <code>try
+              &#123;
+                  var data = extractor.ExtractFromFile("prescription.xml");
+              &#125;
+              catch (ArgumentException ex)
+              &#123;
+                  // Dateipfad ist null oder leer
+              &#125;
+              catch (FileNotFoundException ex)
+              &#123;
+                  // Datei existiert nicht
+              &#125;
+              catch (XmlException ex)
+              &#123;
+                  // XML ist fehlerhaft
+              &#125;
+              catch (InvalidOperationException ex)
+              &#123;
+                // Extraktion fehlgeschlagen
+              &#125;
+              </code></pre>
+
+            <h3 class="h4 mt-4">Performance</h3>
+            <ul>
+              <li>Effiziente XPath-Abfragen für die Datenextraktion</li>
+              <li>Verzögerte JSON-Deserialisierung (nur beim Zugriff auf Eigenschaften)</li>
+              <li>Minimale Allokationen für bessere Speichereffizienz</li>
+            </ul>
+
+            <h3 class="h4 mt-4">Thread-Sicherheit</h3>
+            <p><strong>ERezeptAbgabeExtractor</strong>-Instanzen sind nach der Initialisierung für Leseoperationen
+              threadsicher.</p>
+
+            <h3 class="h4 mt-4">Lizenz</h3>
+            <p>Copyright © ITW-Services 2026</p>
+            <p>Dieses Projekt ist unter der MIT-Lizenz lizenziert. Details finden Sie in der
+              <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT-Lizenzdatei</a>.
+            <h3 class="h4 mt-4">Support</h3>
+            <p>Bei Problemen, Fragen oder Beiträgen wenden Sie sich bitte an info@itw-services.de.</p>
+
+            <h3 class="h4 mt-4">Versionshistorie</h3>
+            <h4 class="h5">1.0.0</h4>
+            <ul>
+              <li>Erstveröffentlichung</li>
+              <li>Vollständige eRezept FHIR-XML-Extraktion</li>
+              <li>.NET Standard 2.0 Unterstützung</li>
+              <li>Umfassende Modellklassen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

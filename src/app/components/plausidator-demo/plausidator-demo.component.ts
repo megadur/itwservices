@@ -16,6 +16,7 @@ export class PlausidatorDemoComponent {
   fhirContent: string = '';
   validationResult: any = null;
   isLoading = false;
+  isReadingFile = false;
   error: string | null = null;
   requestStatus: string | null = null;
 
@@ -27,11 +28,22 @@ export class PlausidatorDemoComponent {
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
+      this.isReadingFile = true;
+      this.cdr.detectChanges();
       const reader = new FileReader();
       reader.onload = (e) => {
         this.fhirContent = e.target?.result as string;
         this.validationResult = null;
         this.error = null;
+      };
+      reader.onerror = () => {
+        this.error = 'Datei konnte nicht gelesen werden.';
+      };
+      reader.onabort = () => {
+        this.error = 'Datei-Lesevorgang abgebrochen.';
+      };
+      reader.onloadend = () => {
+        this.isReadingFile = false;
         this.cdr.detectChanges();
       };
       reader.readAsText(file);

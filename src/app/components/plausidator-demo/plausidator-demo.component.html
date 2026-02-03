@@ -6,28 +6,31 @@
     <div class="row justify-content-center">
       <div class="col-md-10 col-lg-8">
         <p class="lead text-muted mb-4 text-start">
-          Validate your e-prescriptions (E-Rezept) against TA1 rules using our comprehensive
-          validation engine.
+          Eine .NET 8 (LTS) REST-API zur Validierung elektronischer Rezepte gemäß gematik, SGB V, AMVV und BtMG.
         </p>
         <div class="text-center mb-4">
             <a routerLink="/plausidator/status" class="btn btn-outline-info btn-sm">
-                <i class="fa fa-list-alt me-1"></i> View Validation Rules Status
+                <i class="fa fa-list-alt me-1"></i> Den Validation Rules Status anzeigen.
             </a>
         </div>
-        <div class="features mb-4">
-          <div class="d-flex align-items-center mb-2">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>
-            <span>Full TA1 Rule Verification</span>
-          </div>
-          <div class="d-flex align-items-center mb-2">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>
-            <span>Support for JSON and XML FHIR Bundles</span>
-          </div>
-          <div class="d-flex align-items-center">
-            <i class="bi bi-check-circle-fill text-success me-2"></i>
-            <span>Detailed Error Reporting</span>
-          </div>
-        </div>
+              <div class="features mb-4">
+        <h3 class="h4">Funktionen</h3>
+        <ul>
+          <li>
+            <strong>Plattformübergreifend</strong>: PZN-Validierung via ABDA-API
+          </li>
+          <li>
+            <strong>Standardkonform</strong>: Entspricht den deutschen KBV/ABDA FHIR-Spezifikationen
+          </li>
+          <li>
+            <strong>Unterstützung</strong>: Liest JSON- und XML-FHIR-Bundles, Liefert JSON-Serialisierung für komplexe
+            verschachtelte Objekte
+          </li>
+          <li>
+            <strong>Umfassend</strong>: BtM-Spezialregeln, Dosierungsprüfungen, Detaillierte Fehlerberichte
+          </li>
+        </ul>
+      </div>
         <div class="card shadow-lg border-0 rounded-lg">
           <div class="card-body p-5">
             <div class="mb-3">
@@ -43,11 +46,16 @@
 
             <div class="mb-3">
               <label class="form-label">Or Paste Content</label>
+              <div *ngIf="isReadingFile" class="d-flex align-items-center text-muted mb-2">
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Datei wird geladen…
+              </div>
               <textarea
                 class="form-control font-monospace"
                 rows="10"
                 [(ngModel)]="fhirContent"
                 placeholder="Paste FHIR Bundle content here..."
+                [disabled]="isReadingFile"
               ></textarea>
             </div>
 
@@ -55,7 +63,7 @@
               <button
                 class="btn btn-primary"
                 type="button"
-                [disabled]="!fhirContent || isLoading"
+                [disabled]="!fhirContent || isLoading || isReadingFile"
                 (click)="validate()"
               >
                 <span

@@ -1,0 +1,13 @@
+.card-body h3,
+.card-body h4 {
+  color: #0d6efd;
+}
+
+pre {
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+}
+
+a {
+  text-decoration: none;
+}

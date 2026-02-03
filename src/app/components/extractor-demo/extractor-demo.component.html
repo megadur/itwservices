@@ -1,67 +1,104 @@
 <section class="clean-block clean-form dark">
   <div class="container">
-      <div class="block-heading">
-          <h2 class="text-info">FHIR Extractor Demo</h2>
-          <p class="lead text-muted mb-4">
-              Nutzen Sie das volle Potenzial Ihrer Gesundheitsdaten mit unserem fortschrittlichen FHIR-Extraktor. 
-              Verwandeln Sie komplexe eRezept-XML-Dateien nahtlos in strukturierte JSON-Formate. 
-              Unsere auf <strong>.NET Standard 2.0</strong> basierende DLL bietet maximale Kompatibilität und läuft mühelos sowohl in <strong>.NET Framework</strong>- als auch in <strong>.NET Core</strong>-Anwendungen.
-          </p>
-          <div class="features mb-4">
-              <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check-circle-fill text-success me-2"></i>
-                  <span>Sofortige XML-zu-JSON-Konvertierung</span>
-              </div>
-              <div class="d-flex align-items-center mb-2">
-                  <i class="bi bi-check-circle-fill text-success me-2"></i>
-                  <span>Universelle Kompatibilität (.NET Core & Framework)</span>
-              </div>
-              <div class="d-flex align-items-center">
-                  <i class="bi bi-check-circle-fill text-success me-2"></i>
-                  <span>Sichere Verarbeitung</span>
-              </div>
-          </div>
+    <div class="block-heading">
+      <h2 class="text-info">FHIR Extractor Demo</h2>
+      <p class="lead text-muted mb-4">
+        Nutzen Sie das volle Potenzial Ihrer Gesundheitsdaten mit unserem fortschrittlichen
+        FHIR-Extraktor. Verwandeln Sie komplexe eRezept-XML-Dateien nahtlos in strukturierte
+        JSON-Formate.
+      </p>
+      <div class="features mb-4">
+        <h3 class="h4">Funktionen</h3>
+        <ul>
+          <li>
+            <strong>Plattformübergreifend</strong>: Funktioniert mit .NET Framework 4.6.1+ und .NET
+            Core 2.0+
+          </li>
+          <li>
+            <strong>Standardkonform</strong>: Entspricht den deutschen KBV/ABDA FHIR-Spezifikationen
+          </li>
+          <li><strong>Typsicher</strong>: Stark typisierte Modellklassen für alle eRezept-Daten</li>
+          <li>
+            <strong>JSON-Unterstützung</strong>: Integrierte JSON-Serialisierung für komplexe
+            verschachtelte Objekte
+          </li>
+          <li>
+            <strong>Umfassend</strong>: Extrahiert alle Verordnungsdaten einschließlich Abrechnung,
+            Versicherung, Apotheke und Medikation
+          </li>
+        </ul>
       </div>
-      <div class="row justify-content-center">
-          <div class="col-md-10 col-lg-8">
-              <div class="card shadow-lg border-0 rounded-lg">
-                  <div class="card-body p-5">
-                      <div class="mb-3">
-                          <label class="form-label" for="customFile">Choose XML File</label>
-                          <input type="file" class="form-control" id="customFile" accept=".xml" (change)="onFileSelected($event)">
-                      </div>
-
-                      <div class="mb-3">
-                          <label class="form-label" for="fileContent">Or Paste Content</label>
-                          <textarea class="form-control font-monospace" id="fileContent" rows="10" [(ngModel)]="fileContent" placeholder="Load a file or paste the content here..."></textarea>
-                      </div>
-                      
-                      <div class="d-grid gap-2">
-                          <button class="btn btn-primary" type="button" [disabled]="!fileContent || isLoading" (click)="extract()">
-                              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                              Extract Data
-                          </button>
-                      </div>
-
-                      <div *ngIf="error" class="alert alert-danger mt-3">
-                          {{ error }}
-                      </div>
-                  </div>
-              </div>
-          </div>
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-outline-primary" routerLink="/extractor/readme">Projekt-README</a>
       </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg border-0 rounded-lg">
+          <div class="card-body p-5">
+            <div class="mb-3">
+              <label class="form-label" for="customFile">Choose XML File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="customFile"
+                accept=".xml"
+                (change)="onFileSelected($event)"
+              />
+            </div>
 
-      <div class="row justify-content-center mt-5" *ngIf="extractionResult">
-          <div class="col-md-12">
-              <div class="card shadow-sm">
-                  <div class="card-header bg-success text-white">
-                      Extraction Result
-                  </div>
-                  <div class="card-body">
-                      <pre class="bg-light p-3 border rounded"><code>{{ extractionResult | json }}</code></pre>
-                  </div>
+            <div class="mb-3">
+              <label class="form-label" for="fileContent">Or Paste Content</label>
+              <div *ngIf="isReadingFile" class="d-flex align-items-center text-muted mb-2">
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Datei wird geladen…
               </div>
+              <textarea
+                class="form-control font-monospace"
+                id="fileContent"
+                rows="10"
+                [(ngModel)]="fileContent"
+                placeholder="Load a file or paste the content here..."
+                [disabled]="isReadingFile"
+              ></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button
+                class="btn btn-primary"
+                type="button"
+                [disabled]="!fileContent || isLoading || isReadingFile"
+                (click)="extract()"
+              >
+                <span
+                  *ngIf="isLoading"
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Extract Data
+              </button>
+            </div>
+
+            <div *ngIf="error" class="alert alert-danger mt-3">
+              {{ error }}
+            </div>
           </div>
+        </div>
       </div>
+    </div>
+
+    <div class="row justify-content-center mt-5" *ngIf="extractionResult">
+      <div class="col-md-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-success text-white">Extraction Result</div>
+          <div class="card-body">
+            <pre
+              class="bg-light p-3 border rounded"
+            ><code>{{ extractionResult | json }}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
