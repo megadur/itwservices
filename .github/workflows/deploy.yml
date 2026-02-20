@@ -1,0 +1,28 @@
+name: Build and Deploy Angular
+on:
+  push:
+    branches:
+      - main # Oder 'master', je nach deinem Standard-Branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Nutze die Version, die zu deinem Projekt passt
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build -- --base-href /itwservices/
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist/itw-portfolio/browser # Pfad prüfen (Angular 17+ nutzt /browser)
+          branch: gh-pages
