@@ -66,7 +66,7 @@ export class ExtractorDemoComponent {
     formData.append('file', blob, filename);
 
     const baseUrl = environment.apiBaseUrl?.replace(/\/$/, '') ?? '';
-    const url = `${baseUrl}/api/extract`;
+    const url = `${baseUrl}/extract`;
 
     this.http.post(url, formData).subscribe({
       next: (res) => {

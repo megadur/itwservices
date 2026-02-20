@@ -69,7 +69,7 @@ export class PlausidatorDemoComponent {
     });
 
     const baseUrl = environment.validationBaseUrl?.replace(/\/$/, '') ?? '';
-    const url = `${baseUrl}/api/validation/e-rezept`;
+    const url = `${baseUrl}/validation/e-rezept`;
 
     console.log('Sending request to:', url);
     this.http.post(url, this.fhirContent, { headers }).subscribe({
