@@ -34,7 +34,10 @@ jobs:
         run: npm ci
 
       - name: Build Angular App
-        run: npx ng build --configuration production --base-href /itwservices/
+        run: npx ng build --configuration production --base-href /
+
+      - name: Copy CNAME
+        run: cp CNAME dist/itw-portfolio/browser/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
