@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "http://werktopf:5080",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

@@ -10,6 +10,22 @@ To start a local development server, run:
 ng serve
 ```
 
+or
+
+```bash
+npm start
+```
+
+### Environment targets
+
+- `npm start` (Angular `development`): proxies `/api` to `http://localhost:5030`
+- `npm run start:staging` (Angular `staging`): proxies `/api` to `http://werktopf:5080`
+
+Proxy files:
+
+- `proxy.conf.json` for development
+- `proxy.staging.conf.json` for staging
+
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding

@@ -58,6 +58,11 @@
               "extractLicenses": false,
               "sourceMap": true
             },
+            "staging": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
             "remote": {
               "optimization": false,
               "extractLicenses": false,
@@ -74,12 +79,19 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "itw-portfolio:build:production"
             },
             "development": {
               "buildTarget": "itw-portfolio:build:development"
+            },
+            "staging": {
+              "buildTarget": "itw-portfolio:build:staging",
+              "proxyConfig": "proxy.staging.conf.json"
             },
             "remote": {
               "buildTarget": "itw-portfolio:build:remote"
