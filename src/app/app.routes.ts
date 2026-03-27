@@ -5,6 +5,8 @@ import { ExtractorDemoComponent } from './components/extractor-demo/extractor-de
 import { ExtractorDemoSubpage } from './components/extractor-demo-subpage/extractor-demo-subpage';
 import { PlausidatorDemoComponent } from './components/plausidator-demo/plausidator-demo.component';
 import { ValidationStatusComponent } from './components/plausidator-demo/validation-status/validation-status.component';
+import { Impressum } from './components/impressum/impressum';
+import { Datenschutz } from './components/datenschutz/datenschutz';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -13,4 +15,6 @@ export const routes: Routes = [
     { path: 'extractor/readme', component: ExtractorDemoSubpage },
     { path: 'plausidator', component: PlausidatorDemoComponent },
     { path: 'plausidator/status', component: ValidationStatusComponent },
+    { path: 'impressum', component: Impressum },
+    { path: 'datenschutz', component: Datenschutz },
 ];
