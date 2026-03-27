@@ -5,3 +5,22 @@ footer {
     padding: 2rem 0;
     font-size: 0.9rem;
 }
+
+.footer-links {
+    margin-top: 0.5rem;
+}
+
+.footer-links a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-links .sep {
+    margin: 0 0.5rem;
+    color: #7f8c8d;
+}
